@@ -1,0 +1,10 @@
+<resources>
+    <string name="title_my_topics">My Topics</string>
+    <string name="search_topics">Search your topics...</string>
+    <string name="add_topic">Add Topic</string>
+    <string name="app_name">NeuroKeep</string>
+    <string name="topic_icon">Topic Icon</string>
+    <string name="topic_cognitive_biases">Cognitive Biases</string>
+    <string name="topic_date">Added Oct 24, 2023</string>
+    <string name="confidence_high">High</string>
+</resources>

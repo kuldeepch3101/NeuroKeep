@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <!-- TOP ROW: icon + text + checkbox -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Topic icon -->
+            <ImageView
+                android:id="@+id/imgTopic"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_default"
+                android:padding="2dp"/>
+
+            <!-- Title + date -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#111827"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+            </LinearLayout>
+
+            <!-- Mark complete checkbox -->
+            <CheckBox
+                android:id="@+id/checkComplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#7F13EC"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Mark complete"/>
+
+        </LinearLayout>
+
+        <!-- BOTTOM ROW: confidence badge + score + completed badge + yt link -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
+
+            <!-- Confidence badge -->
+            <TextView
+                android:id="@+id/txtConfBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mid 5/10"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/bg_confidence_circle"/>
+
+            <!-- Last quiz score -->
+            <TextView
+                android:id="@+id/txtLastScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last quiz: 4/5"
+                android:textSize="12sp"
+                android:textColor="#7249A9"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"/>
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <!-- COMPLETED badge -->
+            <TextView
+                android:id="@+id/badgeCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✅ Done"
+                android:textSize="12sp"
+                android:textColor="#065F46"
+                android:background="#D1FAE5"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:visibility="gone"/>
+
+            <!-- YouTube quick link -->
+            <TextView
+                android:id="@+id/txtYoutubePreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶ Video"
+                android:textColor="#3B28CC"
+                android:textSize="12sp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

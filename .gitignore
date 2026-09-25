@@ -1,0 +1,46 @@
+# Android / Gradle
+.gradle/
+build/
+*/build/
+
+# Local configuration
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+
+# Generated files
+captures/
+.externalNativeBuild/
+.cxx/
+
+# APK / AAB
+*.apk
+*.aab
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keystore (VERY IMPORTANT)
+*.jks
+*.keystore
+
+# Node.js Server
+
+node_modules/
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MongoDB credentials
+learnkeep-server/.env
+
+# OS / misc
+.DS_Store

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F6F8"
+    android:fitsSystemWindows="true">
+
+    <!-- ═══ STEP 1: Confidence selector ═══ -->
+    <LinearLayout
+        android:id="@+id/layoutConfidence"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📚"
+            android:textSize="48sp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/txtTopicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1E1924"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Before we start — how confident do you feel about this topic right now?"
+            android:textSize="15sp"
+            android:textColor="#4C4355"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="28dp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/confidenceContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp"/>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/txtConfidenceValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5/10  •  Medium"
+            android:textColor="#7249A9"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnStartTest"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Start AI Quiz →"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#7F13EC"
+            android:layout_marginTop="32dp"/>
+
+    </LinearLayout>
+
+    <!-- ═══ STEP 2: Loading ═══ -->
+    <LinearLayout
+        android:id="@+id/layoutLoading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ProgressBar
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminateTint="#7F13EC"/>
+
+        <TextView
+            android:id="@+id/txtLoadingStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🤖 Generating your quiz…"
+            android:textSize="16sp"
+            android:textColor="#4C4355"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+    <!-- ═══ STEP 3: Question ═══ -->
+    <LinearLayout
+        android:id="@+id/layoutQuestion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Header row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtTopicTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1E1924"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/txtProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#7249A9"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="10dp"
+            android:progressTint="#7F13EC"
+            android:progressBackgroundTint="#E9DFEF"/>
+
+        <!-- Question card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <TextView
+                android:id="@+id/txtQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="17sp"
+                android:textColor="#1E1924"
+                android:lineSpacingMultiplier="1.4"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Options -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/layoutOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+        </ScrollView>
+
+        <!-- Explanation -->
+        <TextView
+            android:id="@+id/txtExplanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:background="#F5EAFA"
+            android:textSize="14sp"
+            android:textColor="#4C4355"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Next button -->
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Next →"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#7F13EC"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

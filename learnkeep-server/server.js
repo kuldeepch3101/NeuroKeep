@@ -35,6 +35,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const GEMINI_MODELS =[
     "gemini-2.5-flash-lite",
+    "gemini-2.5-flash",
     "gemini-1.5-flash-latest",
     "gemini-1.5-flash",
     "gemini-pro"

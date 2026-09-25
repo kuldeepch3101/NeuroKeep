@@ -116,7 +116,7 @@ public class AiChatBottomSheet extends BottomSheetDialogFragment {
         });
 
         if (messages.isEmpty()) {
-            messages.add("👋 Hi! I'm your LearnKeep AI. Ask me anything!");
+            messages.add("👋 Hi! I'm your NeuroKeep AI. Ask me anything!");
             isUserList.add(false);
         }
 

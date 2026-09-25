@@ -34,8 +34,10 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log(err));
 
 const GEMINI_MODELS =[
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-latest",
+    "gemini-3.5-flash-lite",
     "gemini-2.5-flash-lite",
-    "gemini-2.5-flash",
     "gemini-1.5-flash-latest",
     "gemini-1.5-flash",
     "gemini-pro"

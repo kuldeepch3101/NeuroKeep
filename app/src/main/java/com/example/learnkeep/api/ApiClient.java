@@ -14,7 +14,7 @@ public class ApiClient {
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://learnkeep.onrender.com/")
+                    .baseUrl("https://neurokeep.onrender.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -32,7 +32,7 @@ public class ApiClient {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl("https://learnkeep.onrender.com/")
+                .baseUrl("https://neurokeep.onrender.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

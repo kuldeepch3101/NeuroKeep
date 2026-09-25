@@ -4,7 +4,7 @@ function otpTemplate(otp) {
         <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4), -10px -10px 30px rgba(255, 255, 255, 1); padding: 50px 40px; text-align: center;">
 
             <div style="margin-bottom: 25px;">
-                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">LearnKeep</div>
+                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">NeuroKeep</div>
             </div>
 
             <h3 style="color: #1a1a1a; margin-top: 0; font-weight: bold; font-size: 18px;">Verification Required</h3>
@@ -29,7 +29,7 @@ function resetOtpTemplate(otp) {
         <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4), -10px -10px 30px rgba(255, 255, 255, 1); padding: 50px 40px; text-align: center;">
 
             <div style="margin-bottom: 25px;">
-                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">LearnKeep</div>
+                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">NeuroKeep</div>
             </div>
 
             <h3 style="color: #EF4444; margin-top: 0; font-weight: bold; font-size: 20px;">🔐 Reset Password</h3>
@@ -58,9 +58,9 @@ function welcomeTemplate(name) {
     <div style="background-color: #f0f0f3; padding: 50px 20px; font-family: Arial, sans-serif;">
         <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4), -10px -10px 30px rgba(255, 255, 255, 1); padding: 50px 40px; text-align: center;">
             <div style="margin-bottom: 25px;">
-                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">LearnKeep</div>
+                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">NeuroKeep</div>
             </div>
-            <h3 style="color: #1a1a1a; margin-top: 0; font-weight: bold; font-size: 22px;">🎉 Welcome to LearnKeep!</h3>
+            <h3 style="color: #1a1a1a; margin-top: 0; font-weight: bold; font-size: 22px;">🎉 Welcome to NeuroKeep!</h3>
             <p style="color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
                 Hi ${name},<br><br>
                 Your email has been verified and your account is successfully created. We are thrilled to have you on board!
@@ -92,7 +92,7 @@ function loginAlertTemplate() {
 
             <!-- Logo -->
             <div style="margin-bottom: 25px;">
-                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">LearnKeep</div>
+                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">NeuroKeep</div>
             </div>
 
             <!-- Alert Heading -->
@@ -100,7 +100,7 @@ function loginAlertTemplate() {
 
             <!-- Alert Text -->
             <p style="color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
-                We noticed a new login to your LearnKeep account.
+                We noticed a new login to your NeuroKeep account.
 
             </p>
 
@@ -136,7 +136,7 @@ function passwordChangedTemplate() {
 
             <!-- Logo -->
             <div style="margin-bottom: 25px;">
-                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">LearnKeep</div>
+                <div style="font-size: 28px; font-weight: bold; color: #6a46b3;">NeuroKeep</div>
             </div>
 
             <!-- Success Heading -->
@@ -144,7 +144,7 @@ function passwordChangedTemplate() {
 
             <!-- Confirmation Text -->
             <p style="color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
-                The password for your LearnKeep account has been successfully changed.<br><br>
+                The password for your NeuroKeep account has been successfully changed.<br><br>
                 You can now use your new password to log in across all your devices.
             </p>
 

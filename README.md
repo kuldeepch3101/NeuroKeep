@@ -1,4 +1,4 @@
-# 📚 LearnKeep – Smart Knowledge Tracking Android App
+# 📚 NeuroKeep – Smart Knowledge Tracking Android App
 
 LearnKeep is a modern Android application built using **Java**, **Room Database**, and a **Node.js + MongoDB cloud backend** that helps users capture, organize, and review their learning efficiently.
 

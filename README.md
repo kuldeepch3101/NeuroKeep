@@ -1,6 +1,6 @@
 # 📚 NeuroKeep – Smart Knowledge Tracking Android App
 
-LearnKeep is a modern Android application built using **Java**, **Room Database**, and a **Node.js + MongoDB cloud backend** that helps users capture, organize, and review their learning efficiently.
+NeuroKeep is a modern Android application built using **Java**, **Room Database**, and a **Node.js + MongoDB cloud backend** that helps users capture, organize, and review their learning efficiently.
 
 The app allows users to store topics, attach files, track confidence levels, schedule review reminders, and manage learning resources in a clean and structured way.
 

@@ -67,10 +67,24 @@ public class GeminiService {
                 // Convert List<McqQuestion> to McqQuestion[]
                 McqQuestion[] arr = body.questions.toArray(new McqQuestion[0]);
                 mainThread.post(() -> callback.onSuccess(arr));
-
+            
+            } catch (java.net.SocketTimeoutException e) {
+                mainThread.post(() ->
+                    callback.onError(
+                        "Quiz generation took too long. Please try again."
+                    )
+                );
             } catch (Exception e) {
-                String msg = e.getMessage() != null ? e.getMessage() : "Network error";
-                mainThread.post(() -> callback.onError(msg));
+                String msg = e.getMessage() != null
+                    ? e.getMessage()
+                    : "Network error";
+
+                android.util.Log.e(
+                    "GeminiService",
+                    "MCQ generation failed",
+                e
+            ); 
+            mainThread.post(() -> callback.onError(msg));
             }
         });
     }

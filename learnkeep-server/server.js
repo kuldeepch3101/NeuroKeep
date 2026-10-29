@@ -16,7 +16,7 @@ const otpStore       = {};
 const app            = express();
 const bcrypt         = require("bcrypt");
 const JWT_SECRET     = process.env.JWT_SECRET;
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
 
 const {
     otpTemplate,
@@ -33,46 +33,50 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err));
 
-const GEMINI_MODELS =[
-    "nvidia/nemotron-3-ultra-550b-a55b",
-    "gemini-3.5-flash",
-    "gemini-3.5-flash-latest",
-    "gemini-3.5-flash-lite",
-    "gemini-2.5-flash-lite",
-    "gemini-1.5-flash-latest",
-    "gemini-1.5-flash",
-    "gemini-pro"
-];
+const OpenAI = require("openai");
+const NVIDIA_MODEL =
+    process.env.NVIDIA_MODEL || "nvidia/nemotron-3-ultra-550b-a55b";
 
-async function callGemini(prompt) {
-    let lastError;
-    for (const model of GEMINI_MODELS) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-        try {
-            const response = await axios.post(url, {
-                contents: [{ parts: [{ text: prompt }] }]
-            }, {
-                headers: { "Content-Type": "application/json" },
-                timeout: 30000
-            });
+const nvidiaClient = new OpenAI({
+    baseURL: "https://integrate.api.nvidia.com/v1",
+    apiKey: NVIDIA_API_KEY,
+});
 
-            const text = response.data.candidates[0].content.parts[0].text;
-            console.log(`✅ Gemini responded using model: ${model}`);
-            return text;
-        } catch (err) {
-            const status = err.response?.status;
-            const detail = err.response?.data?.error?.message || err.message;
-            console.warn(`⚠️  Model ${model} failed (${status}): ${detail}`);
-            lastError = `${model}: ${detail}`;
 
-            if (status === 403 || status === 429) {
-                throw new Error(`Gemini auth/quota error on ${model}: ${detail}`);
-            }
-        }
+async function callNvidia(prompt) {
+    if (!NVIDIA_API_KEY) {
+        throw new Error("NVIDIA_API_KEY is missing from .env");
     }
 
-    throw new Error(`All Gemini models failed. Last error: ${lastError}`);
+    const completion = await nvidiaClient.chat.completions.create({
+        model: NVIDIA_MODEL,
+        messages: [
+            {
+                role: "user",
+                content: prompt,
+            },
+        ],
+        temperature: 0.6,
+        top_p: 0.95,
+        max_tokens: 4096,
+        stream: false,
+        extra_body: {
+            chat_template_kwargs: {
+                enable_thinking: true,
+            },
+        },
+    });
+
+    const reply = completion.choices?.[0]?.message?.content;
+
+    if (!reply) {
+        throw new Error("NVIDIA returned an empty response");
+    }
+
+    console.log(`NVIDIA responded using model: ${NVIDIA_MODEL}`);
+    return reply;
 }
+
 
 app.post("/gemini/mcq", authMiddleware, async (req, res) => {
     try {

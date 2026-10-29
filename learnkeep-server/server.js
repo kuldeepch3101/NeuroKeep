@@ -45,7 +45,7 @@ const nvidiaClient = new OpenAI({
 
 async function callNvidia(prompt) {
     if (!NVIDIA_API_KEY) {
-        throw new Error("NVIDIA_API_KEY is missing from .env");
+        throw new Error("NVIDIA_API_KEY is missing from environment variables");
     }
 
     const completion = await nvidiaClient.chat.completions.create({
@@ -60,11 +60,6 @@ async function callNvidia(prompt) {
         top_p: 0.95,
         max_tokens: 4096,
         stream: false,
-        extra_body: {
-            chat_template_kwargs: {
-                enable_thinking: true,
-            },
-        },
     });
 
     const reply = completion.choices?.[0]?.message?.content;

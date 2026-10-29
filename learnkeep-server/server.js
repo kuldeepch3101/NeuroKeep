@@ -16,7 +16,7 @@ const otpStore       = {};
 const app            = express();
 const bcrypt         = require("bcrypt");
 const JWT_SECRET     = process.env.JWT_SECRET;
-const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const {
     otpTemplate,
@@ -33,45 +33,45 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err));
 
-const OpenAI = require("openai");
-const NVIDIA_MODEL =
-    process.env.NVIDIA_MODEL || "nvidia/nemotron-3-ultra-550b-a55b";
+const GEMINI_MODELS =[
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-latest",
+    "gemini-3.5-flash-lite",
+    "gemini-2.5-flash-lite",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-flash",
+    "gemini-pro"
+];
 
-const nvidiaClient = new OpenAI({
-    baseURL: "https://integrate.api.nvidia.com/v1",
-    apiKey: NVIDIA_API_KEY,
-});
+async function callGemini(prompt) {
+    let lastError;
+    for (const model of GEMINI_MODELS) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+        try {
+            const response = await axios.post(url, {
+                contents: [{ parts: [{ text: prompt }] }]
+            }, {
+                headers: { "Content-Type": "application/json" },
+                timeout: 30000
+            });
 
+            const text = response.data.candidates[0].content.parts[0].text;
+            console.log(`✅ Gemini responded using model: ${model}`);
+            return text;
+        } catch (err) {
+            const status = err.response?.status;
+            const detail = err.response?.data?.error?.message || err.message;
+            console.warn(`⚠️  Model ${model} failed (${status}): ${detail}`);
+            lastError = `${model}: ${detail}`;
 
-async function callNvidia(prompt) {
-    if (!NVIDIA_API_KEY) {
-        throw new Error("NVIDIA_API_KEY is missing from environment variables");
+            if (status === 403 || status === 429) {
+                throw new Error(`Gemini auth/quota error on ${model}: ${detail}`);
+            }
+        }
     }
 
-    const completion = await nvidiaClient.chat.completions.create({
-        model: NVIDIA_MODEL,
-        messages: [
-            {
-                role: "user",
-                content: prompt,
-            },
-        ],
-        temperature: 0.6,
-        top_p: 0.95,
-        max_tokens: 4096,
-        stream: false,
-    });
-
-    const reply = completion.choices?.[0]?.message?.content;
-
-    if (!reply) {
-        throw new Error("NVIDIA returned an empty response");
-    }
-
-    console.log(`NVIDIA responded using model: ${NVIDIA_MODEL}`);
-    return reply;
+    throw new Error(`All Gemini models failed. Last error: ${lastError}`);
 }
-
 
 app.post("/gemini/mcq", authMiddleware, async (req, res) => {
     try {
@@ -96,8 +96,7 @@ app.post("/gemini/mcq", authMiddleware, async (req, res) => {
             `  }\n` +
             `]\n` +
             `correctIndex is the 0-based index in the options array.`;
-        const raw = await callNvidia(prompt);
-
+        const raw = await callGemini(prompt);
 
         let cleaned = raw.trim();
         if (cleaned.startsWith("```")) {
@@ -146,7 +145,7 @@ app.post("/gemini/chat", authMiddleware, async (req, res) => {
         }
         ctx += `User message: ${message}`;
 
-        const reply = await callNvidia(ctx);
+        const reply = await callGemini(ctx);
         res.json({ success: true, reply });
 
     } catch (err) {
@@ -157,7 +156,7 @@ app.post("/gemini/chat", authMiddleware, async (req, res) => {
 
 app.get("/gemini/ping", async (req, res) => {
     try {
-        const reply = await callNvidia("Say exactly: OK");
+        const reply = await callGemini("Say exactly: OK");
         res.json({ success: true, reply });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

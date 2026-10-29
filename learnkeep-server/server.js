@@ -101,7 +101,8 @@ app.post("/gemini/mcq", authMiddleware, async (req, res) => {
             `  }\n` +
             `]\n` +
             `correctIndex is the 0-based index in the options array.`;
-        const raw = await callGemini(prompt);
+        const raw = await callNvidia(prompt);
+
 
         let cleaned = raw.trim();
         if (cleaned.startsWith("```")) {
@@ -150,7 +151,7 @@ app.post("/gemini/chat", authMiddleware, async (req, res) => {
         }
         ctx += `User message: ${message}`;
 
-        const reply = await callGemini(ctx);
+        const reply = await callNvidia(ctx);
         res.json({ success: true, reply });
 
     } catch (err) {
@@ -161,7 +162,7 @@ app.post("/gemini/chat", authMiddleware, async (req, res) => {
 
 app.get("/gemini/ping", async (req, res) => {
     try {
-        const reply = await callGemini("Say exactly: OK");
+        const reply = await callNvidia("Say exactly: OK");
         res.json({ success: true, reply });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

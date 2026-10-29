@@ -221,7 +221,7 @@ app.post("/gemini/mcq", authMiddleware, async (req, res) => {
       : 5;
 
     const prompt = `
-You are LearnKeep AI, an educational assistant.
+You are NeuroKeep AI, an educational assistant.
 
 Generate exactly 5 multiple-choice questions about this topic:
 ${title}
@@ -323,7 +323,7 @@ app.post("/gemini/chat", authMiddleware, async (req, res) => {
     }
 
     let ctx =
-      "You are LearnKeep AI, a smart and friendly study assistant.\n";
+      "You are NeuroKeep AI, a smart and friendly study assistant.\n";
     ctx += "Use the following saved knowledge to personalize answers:\n\n";
 
     if (!Array.isArray(topics) || topics.length === 0) {

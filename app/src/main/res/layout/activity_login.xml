@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:text="LearnKeep"
+            android:text="NeuroKeep"
             android:textColor="#1E1924"
             android:textSize="34sp"
             android:textStyle="bold"/>
@@ -345,7 +345,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New to LearnKeep? "
+                android:text="New to NeuroKeep? "
                 android:textColor="#4C4355"
                 android:textSize="14sp"/>
 
